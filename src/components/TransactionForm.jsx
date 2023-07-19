@@ -10,7 +10,11 @@ const TransactionForm = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        addTransaction()
+        addTransaction({
+            id,
+            description,
+            amount
+        })
     }
 
     return (
