@@ -6,7 +6,7 @@ const TransactionForm = () => {
     const { addTransaction } = useGlobalState();
 
     const [description, setDescription] = useState('')
-    const [amount, setAmount] = useState(0)
+    const [amount, setAmount] = useState('')
     
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -15,6 +15,9 @@ const TransactionForm = () => {
             description,
             amount: +amount,
         })
+
+        setAmount('')
+        setDescription('')
     }
 
     return (
@@ -22,11 +25,15 @@ const TransactionForm = () => {
             <form onSubmit={handleSubmit}>
                 <input type="text" placeholder="Enter a description" 
                     onChange={(e) => setDescription(e.target.value)}
+                    value={description}
                     className="bg-zinc-600 text-white px-3 mt-5 py-2 rounded-lg block mb-2 w-full"/>
                 <input type="number" placeholder="0.0" step='0.01'
                     onChange={(e) => setAmount(e.target.value)}
+                    value={amount}
                     className="bg-zinc-600 text-white px-3 py-2 rounded-lg block mb-2 w-full"/>
-                <button className="bg-indigo-700 text-white px-3 py-2 rounded-lg block mb-2 w-full">Add transaction</button>
+                <button className="bg-indigo-700 text-white px-3 py-2 rounded-lg block mb-2 w-full disabled:opacity-50" disabled={!description || !amount}>
+                    Add transaction
+                </button>
             </form>
         </div>
     )
